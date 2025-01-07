@@ -10,10 +10,11 @@ This repository provides a batch script to automate the configuration of [Thrott
 - **Advanced TPL Configuration**: Customizes PL1, PL2, and TTL for fine-tuned CPU power control.
 - **Windows Power Plan Integration**: Applies matching Windows power plans to align with ThrottleStop profiles for optimal performance.
 - **Backup**: Creates the backup of the `ThrottleStop.ini` with initial user's unchanged settings `backup-ThrottleStop.ini`.
+- **Clamping**: Allows clamping of PL1 and PL2 values by appending "c" or "C" to the values.
 
 ## Requirements
 
-1. Install [ThrottleStop](https://www.techpowerup.com/download/techpowerup-throttlestop/)  and [Lenovo Legion Toolkit](https://github.com/BartoszCichecki/LenovoLegionToolkit) on your system.
+1. Install [ThrottleStop](https://www.techpowerup.com/download/techpowerup-throttlestop/) and [Lenovo Legion Toolkit](https://github.com/BartoszCichecki/LenovoLegionToolkit) on your system.
    - Ensure you have the correct paths to `ThrottleStop.exe` and `ThrottleStop.ini`.
 2. A basic understanding of your system's power and performance requirements.
 3. **Enable Start Minimized**: For seamless starting/restarting of `ThrottleStop.exe`, ensure the **"Start Minimized"** option is checked in **ThrottleStop -> Options -> Miscellaneous -> Start Minimized**.
@@ -34,6 +35,7 @@ This repository provides a batch script to automate the configuration of [Thrott
     to your ThrottleStop.exe and ThrottleStop.ini files.
 
      ```bat
+     REM --- Paths to ThrottleStop executable and INI file ---
      set TS_EXE="C:\Program Files\ThrottleStop\ThrottleStop.exe"
      set TS_INI="C:\Program Files\ThrottleStop\ThrottleStop.ini"
      ```
@@ -70,12 +72,14 @@ This repository provides a batch script to automate the configuration of [Thrott
     - In the "Arguments":
       - Write the arguments/options like this **{ProfileName} {PL1} {PL2} {TTL}**. Example:
          ```
-          Example 1: Performance 95 115 56
-          Example 2: Quiet 35 45 0.0010
-         
-          Profiles can be specified by name or number (0=Performance, 1=Balanced, etc.)
-          Example 3: 1 50 75 32
+            ThrottlestopTPLAutomation.bat <ProfileName> <PL1[c|C]> <PL2[c|C]> <TTL>
+            Example 1: ThrottlestopTPLAutomation.bat Quiet 35 45 0.002
+            Example 2: ThrottlestopTPLAutomation.bat 2 35 45 32
+            Example 3: ThrottlestopTPLAutomation.bat Performance 35c 45 20
+            Example 4: ThrottlestopTPLAutomation.bat 0 115C 135C 2560
 
+            Profiles can be specified by name or number (0=Performance, 1=Balanced, etc.)
+            PL1 and PL2 values can be followed by "c" or "C" to indicate that the corresponding value should be clamped.
          ```
     ![image](https://github.com/user-attachments/assets/b672e071-e978-418a-84ca-d1af34b24119)
 
