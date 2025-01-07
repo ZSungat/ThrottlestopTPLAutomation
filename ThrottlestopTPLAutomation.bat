@@ -16,10 +16,15 @@ REM 3. Modify the PROFILE_NAMES and corresponding PROFILE_GUIDS below to match
 REM    your desired profile names and their associated power plan GUIDs.
 REM
 REM Usage:
-REM   ThrottlestopTPLAutomation.bat <ProfileName> <PL1> <PL2> <TTL>
-REM   Example 1: ThrottlestopTPLAutomation.bat Quiet 35 45 0.002
-REM   Example 2: ThrottlestopTPLAutomation.bat 2 35 45 0.002
-REM   Profiles can be specified by name or number (0=Performance, 1=Balanced, etc.)
+REM   ThrottlestopTPLAutomation.bat <ProfileName> <PL1[c|C]> <PL2[c|C]> <TTL>
+REM   Example 1: ThrottlestopTPLAutomation.bat Quiet 35 45 0.002
+REM   Example 2: ThrottlestopTPLAutomation.bat 2 35 45 32
+REM   Example 3: ThrottlestopTPLAutomation.bat Performance 35c 45 20
+REM   Example 4: ThrottlestopTPLAutomation.bat 0 115C 135C 2560
+REM
+REM   Profiles can be specified by name or number (0=Performance, 1=Balanced, etc.)
+REM   PL1 and PL2 values can be followed by "c" or "C" to indicate that the 
+REM   corresponding value should be clamped.
 REM ============================================================================
 
 setlocal EnableDelayedExpansion
